@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# usage: bin/compile <build-dir> <cache-dir> <env-dir>
+
+echo "-----> Installing hoop agent command line"
+
+VERSION=$(curl -s https://releases.hoop.dev/release/latest.txt)
+ENV_DIR=$3
+if [ -f "$ENV_DIR/HOOP_VERSION" ]; then
+    VERSION=$(cat $ENV_DIR/HOOP_VERSION)
+fi
+
+BUILD_DIR=$1/bin
+
+mkdir -p $BUILD_DIR
+curl -s -L https://releases.hoop.dev/release/${VERSION}/hoop_${VERSION}_Linux_$(uname -m).tar.gz -o $BUILD_DIR/hoop_${VERSION}.tar.gz
+tar --extract --file $BUILD_DIR/hoop_${VERSION}.tar.gz -C $BUILD_DIR && rm -f $BUILD_DIR/hoop_${VERSION}.tar.gz
+
+# Make the binary executable
+chmod +x $BUILD_DIR/hoop
+echo "       $($BUILD_DIR/hoop version)"

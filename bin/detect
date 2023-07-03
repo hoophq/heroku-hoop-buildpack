@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# usage <build-dir>
+
+# Check if a binary file is present
+if [ -f "$1/Procfile" ]; then
+    echo "Procfile"
+    exit 0
+fi
+
+# No binary found
+echo "Procfile not detected"
+exit 1

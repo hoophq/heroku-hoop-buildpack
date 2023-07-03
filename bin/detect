@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# usage <build-dir>
+# usage: bin/detect <build-dir>
 
 # Check if a binary file is present
 if [ -f "$1/Procfile" ]; then
